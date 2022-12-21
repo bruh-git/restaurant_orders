@@ -1,6 +1,5 @@
 import csv
 from track_orders import TrackOrders
-from collections import defaultdict
 
 
 def analyze_log(path_to_file):
@@ -8,16 +7,12 @@ def analyze_log(path_to_file):
         raise FileNotFoundError(f"Extensão inválida: '{path_to_file}'")
     track_orders = TrackOrders()
     try:
-        with open(path_to_file, "r") as file:
-            data = csv.reader(file)
-            for orders in data:
-                default = defaultdict(list)
-                default["custumer"].append(orders[0])
-                default["order"].append(orders[1])
-                default["day"].append(orders[2])
-                return default
+        with open(path_to_file) as file:
+            csv_reader = csv.reader(file, delimiter=",")
+            for customer, order, day in csv_reader:
+                track_orders.add_new_order(customer, order, day)
     except FileNotFoundError:
-        raise FileNotFoundError(f"Arquivo inexistente: '{path_to_file}'")
+        raise FileNotFoundError(f'Arquivo inexistente: {path_to_file}')
 
     maria_ordered = track_orders.get_most_ordered_dish_per_customer("maria")
     arnald_burguer = track_orders.get_customer_count_dish(

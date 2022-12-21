@@ -18,11 +18,11 @@ class TrackOrders:
         ]
         return Counter(customer_orders).most_common()[0][0]
 
-    def get_customer_count_dish(self, customer, dish, day):
+    def get_customer_count_dish(self, customer, dish):
         custumer_orders = [
             order[1]
             for order in self._data
-            if order[0] == customer and order[1] == dish and order[2] == day
+            if order[0] == customer and order[1] == dish
         ]
         return len(custumer_orders)
 
