@@ -15,6 +15,7 @@ def analyze_log(path_to_file):
                 default["custumer"].append(orders[0])
                 default["order"].append(orders[1])
                 default["day"].append(orders[2])
+                return default
     except FileNotFoundError:
         raise FileNotFoundError(f"Arquivo inexistente: '{path_to_file}'")
 
@@ -25,7 +26,7 @@ def analyze_log(path_to_file):
     joao_never_visited_days = track_orders.get_days_never_visited_per_customer(
         "joao"
     )
-    with open("data/mkt_campaign.txt", mode="w", encoding="utf-8") as file:
+    with open('data/mkt_campaign.txt', 'w') as file:
         file.write(
             f"{maria_ordered_dish}\n"
             f"{arnald_burguer}\n"
