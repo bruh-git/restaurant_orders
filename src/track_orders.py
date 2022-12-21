@@ -12,17 +12,17 @@ class TrackOrders:
     def add_new_order(self, customer, order, day):
         self._data.append([customer, order, day])
 
-    def get_number_of_orders_per_dish(self, customer):
+    def get_most_ordered_dish_per_customer(self, customer):
         customer_orders = [
             order[1] for order in self._data if order[0] == customer
         ]
         return Counter(customer_orders).most_common()[0][0]
 
-    def get_customer_count_dish(self, customer, dish):
+    def get_customer_count_dish(self, customer, dish, day):
         custumer_orders = [
             order[1]
             for order in self._data
-            if order[0] == customer and order[1] == dish
+            if order[0] == customer and order[1] == dish and order[2] == day
         ]
         return len(custumer_orders)
 
@@ -41,7 +41,11 @@ class TrackOrders:
         return days - customer_days
 
     def get_busiest_day(self):
-        pass
+        busiets_day = Counter(
+            order[2] for order in self._data).most_common()[0][0]
+        return busiets_day
 
     def get_least_busy_day(self):
-        pass
+        least_busiest_day = Counter(
+            order[2] for order in self._data).most_common()[-1][0]
+        return least_busiest_day

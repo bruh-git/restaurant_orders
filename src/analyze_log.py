@@ -19,7 +19,7 @@ def analyze_log(path_to_file):
     except FileNotFoundError:
         raise FileNotFoundError(f"Arquivo inexistente: '{path_to_file}'")
 
-    maria_ordered_dish = track_orders.get_number_of_orders_per_dish("maria")
+    maria_ordered = track_orders.get_most_ordered_dish_per_customer("maria")
     arnald_burguer = track_orders.get_customer_count_dish(
         "arnaldo", "hamburguer")
     joao_never_ordered = track_orders.get_never_ordered_per_customer("joao")
@@ -28,7 +28,7 @@ def analyze_log(path_to_file):
     )
     with open('data/mkt_campaign.txt', 'w') as file:
         file.write(
-            f"{maria_ordered_dish}\n"
+            f"{maria_ordered}\n"
             f"{arnald_burguer}\n"
             f"{joao_never_ordered}\n"
             f"{joao_never_visited_days}\n"
