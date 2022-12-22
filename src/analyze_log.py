@@ -3,9 +3,9 @@ from track_orders import TrackOrders
 
 
 def analyze_log(path_to_file):
+    track_orders = TrackOrders()
     if not path_to_file.endswith(".csv"):
         raise FileNotFoundError(f"Extensão inválida: '{path_to_file}'")
-    track_orders = TrackOrders()
     try:
         with open(path_to_file, 'r') as file:
             csv_reader = csv.reader(file)
@@ -14,7 +14,8 @@ def analyze_log(path_to_file):
     except FileNotFoundError:
         raise FileNotFoundError(f'Arquivo inexistente: {path_to_file}')
 
-    maria_ordered = track_orders.get_most_ordered_dish_per_customer("maria")
+
+"""    maria_ordered = track_orders.get_most_ordered_dish_per_customer("maria")
     arnald_burguer = track_orders.get_customer_count_dish(
         "arnaldo", "hamburguer")
     joao_never_ordered = track_orders.get_never_ordered_per_customer("joao")
@@ -27,4 +28,4 @@ def analyze_log(path_to_file):
             f"{arnald_burguer}\n"
             f"{joao_never_ordered}\n"
             f"{joao_never_visited_days}\n"
-        )
+        ) """
