@@ -7,8 +7,8 @@ def analyze_log(path_to_file):
         raise FileNotFoundError(f"Extensão inválida: '{path_to_file}'")
     track_orders = TrackOrders()
     try:
-        with open(path_to_file) as file:
-            csv_reader = csv.reader(file, delimiter=",")
+        with open(path_to_file, 'r') as file:
+            csv_reader = csv.reader(file)
             for customer, order, day in csv_reader:
                 track_orders.add_new_order(customer, order, day)
     except FileNotFoundError:
