@@ -13,9 +13,9 @@ def analyze_log(path_to_file):
                 track_orders.add_new_order(customer, order, day)
     except FileNotFoundError:
         raise FileNotFoundError(f'Arquivo inexistente: {path_to_file}')
+    return track_orders
 
-
-"""    maria_ordered = track_orders.get_most_ordered_dish_per_customer("maria")
+    """maria_ordered = track_orders.get_most_ordered_dish_per_customer("maria")
     arnald_burguer = track_orders.get_customer_count_dish(
         "arnaldo", "hamburguer")
     joao_never_ordered = track_orders.get_never_ordered_per_customer("joao")
