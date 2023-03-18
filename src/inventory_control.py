@@ -16,10 +16,34 @@ class InventoryControl:
     }
 
     def __init__(self):
-        pass
+        self.inventory = dict(self.MINIMUM_INVENTORY)
 
     def add_new_order(self, customer, order, day):
-        pass
+        for ingredient in self.INGREDIENTS[order]:
+            if self.inventory[ingredient] <= 0:
+                return False
+            self.inventory[ingredient] -= 1
 
     def get_quantities_to_buy(self):
-        pass
+        """ ref:
+        https://cienciaprogramada.com.br/2022/04/funcao-max-em-python/
+        https://pythonacademy.com.br/blog/dict-comprehensions-no-python
+        """
+        return {
+            key: max(self.MINIMUM_INVENTORY[key] - self.inventory[key], 0)
+            for key in self.MINIMUM_INVENTORY
+        }
+
+    def get_available_dishes(self):
+        ingredients_stock = set()
+        dishes_stock = set()
+
+        for ingredient in self.inventory:
+            if self.inventory[ingredient] > 0:
+                ingredients_stock.add(ingredient)
+
+        for dish, ingredients in self.INGREDIENTS.items():
+            if set(ingredients).issubset(ingredients_stock):
+                dishes_stock.add(dish)
+
+        return dishes_stock
